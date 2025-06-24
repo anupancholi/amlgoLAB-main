@@ -12,14 +12,15 @@ The pipeline leverages semantic chunking, fast vector search (FAISS), and a loca
 
 ```mermaid
 graph TD
-    A[Document Upload] --> B[Preprocessing & Cleaning]
+    A[Document Upload] --> B[Preprocessing and Cleaning]
     B --> C[Sentence-aware Chunking]
-    C --> D[Embedding (MiniLM)]
-    D --> E[Vector DB Storage (FAISS)]
-    E --> F[Chat Interface (Streamlit)]
-    F --> G[Query --> Embed --> Retrieve Top Chunks]
-    G --> H[Prompt LLM (Mistral/Ollama) with Context]
+    C --> D[Embedding with MiniLM]
+    D --> E[Vector DB: FAISS]
+    E --> F[Chat Interface: Streamlit]
+    F --> G[User Query -> Retrieve Chunks]
+    G --> H[Prompt LLM (Mistral via Ollama)]
     H --> I[Streamed, Grounded Answer]
+
 ```
 
 **Pipeline Steps:**
