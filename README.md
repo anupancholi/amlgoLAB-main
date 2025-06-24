@@ -1,4 +1,4 @@
-# 📄 RAG Chatbot: Document QA with Streaming LLM Responses
+# 📄 Chatbot: Document QA with Streaming LLM Responses
 
 ## Overview
 
@@ -8,7 +8,7 @@ The pipeline leverages semantic chunking, fast vector search (FAISS), and a loca
 
 ---
 
-## 📐 Project Architecture & Flow
+## Project Architecture & Flow
 
 
 graph TD
