@@ -51,7 +51,7 @@ graph TD
    ollama pull mistral
    ```
 
-4. **Place your document in the **``** folder:**
+4. **Place your document in the **`data`** folder:**
 
    ```bash
    data/AI_Training_Document.txt
@@ -118,7 +118,8 @@ graph TD
 | What are sellers responsible for?       | "Sellers must ensure listed items..."    |
 | Who is eBay's CEO? *(Known Limitation)* | May fail if outside document scope       |
 
-**Example Screenshot:** `data/Screenshot_Chatbot_Demo.png`
+**Example Screenshot:** 
+data/Screenshot_Chatbot_Demo.png
 
 ---
 
