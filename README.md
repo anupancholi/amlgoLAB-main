@@ -2,7 +2,8 @@
 
 ## Overview
 
-This project implements a **Retrieval-Augmented Generation (RAG) chatbot** over a large legal document (eBay User Agreement), enabling users to ask natural language questions and receive fact-grounded, real-time answers.  
+This project implements a **Retrieval-Augmented Generation (RAG) chatbot** over a large legal document (e.g., eBay User Agreement), enabling users to ask natural language questions and receive fact-grounded, real-time answers.
+
 The pipeline leverages semantic chunking, fast vector search (FAISS), and a locally-running instruction-tuned LLM (Mistral-7B via Ollama) for efficient and accurate document QA.
 
 ---
@@ -19,99 +20,122 @@ graph TD
     F --> G[Query --> Embed --> Retrieve Top Chunks]
     G --> H[Prompt LLM (Mistral/Ollama) with Context]
     H --> I[Streamed, Grounded Answer]
+```
 
-    Pipeline Steps:
-Preprocessing: Clean text, remove formatting, split into overlapping, sentence-aligned chunks.
-Embedding: Generate semantic vector for each chunk using all-MiniLM-L6-v2.
-Vector DB: Store chunk vectors in FAISS for fast similarity search.
-Retrieval + Generation: At query time, select top chunks, inject into prompt, and generate a streaming response with local LLM via Ollama.
-User Interface: Streamlit app with live response, chunk sourcing, sidebar info, and full chat history.
+**Pipeline Steps:**
 
-🛠️ Setup & Running the Project Locally
-1. Install Python dependencies
-pip install -r requirements.txt
-python -m nltk.downloader punkt
+- **Preprocessing:** Clean text, remove formatting, split into overlapping, sentence-aligned chunks.
+- **Embedding:** Generate semantic vector for each chunk using `all-MiniLM-L6-v2`.
+- **Vector DB:** Store chunk vectors in FAISS for fast similarity search.
+- **Retrieval + Generation:** At query time, select top chunks, inject into prompt, and generate a streaming response with local LLM via Ollama.
+- **User Interface:** Streamlit app with live response, chunk sourcing, sidebar info, and chat history.
 
-2. Install Ollama (for fast, local LLM inference)
-Download from ollama.com/download and install for your OS.
+---
 
-3. Download the Mistral model
-ollama pull mistral
+## 🛠️ Setup & Running the Project Locally
 
-4. Place your document in the data/ folder
-E.g., data/AI Training Document.txt
+1. **Install Python dependencies:**
 
-5. Preprocess and embed the document
-python src/chunk_document.py
-python src/embed_and_index.py
+   ```bash
+   pip install -r requirements.txt
+   python -m nltk.downloader punkt
+   ```
 
-Or, run:
-jupyter notebook notebooks/01_preprocessing_and_embedding.ipynb
-(for step-by-step, interactive data exploration and building)
+2. **Install Ollama for LLM inference:**
 
-6. Start Ollama for LLM serving
-ollama run mistral
+   - Download from [ollama.com/download](https://ollama.com/download) and install for your OS.
 
-(Leave this running in a terminal.)
-7. Start the Streamlit Chatbot
-streamlit run app.py
-Visit http://localhost:8501 in your browser.
+3. **Download the Mistral model:**
 
+   ```bash
+   ollama pull mistral
+   ```
 
-🤖 Model & Embedding Choices
-Embedding Model:
-all-MiniLM-L6-v2 (Sentence Transformers)
-Fast, accurate representation for semantic search.
-Vector Database:
-FAISS (IndexFlatIP; cosine similarity; CPU-based for small-to-mid scale).
-LLM:
-Mistral-7B-Instruct (run locally via Ollama)
-Provides high-quality, instruction-following answers.
-Efficient GPU/CPU use, real-time token streaming.
+4. **Place your document in the **``** folder:**
 
-Prompt Template Used:
+   ```bash
+   data/AI_Training_Document.txt
+   ```
 
-This template forces the LLM to ground all answers in retrieved text only—minimizing hallucinations.
-🗂️ Project Structure
+5. **Preprocess and embed the document:**
 
-🏃 End-to-End Pipeline Steps
-Document preprocessing:
-Clean & chunk with src/chunk_document.py or the Jupyter notebook.
-Embeddings and DB creation:
-Use src/embed_and_index.py to create MiniLM embeddings and FAISS vector store.
-Launch chatbot:
-Ensure Ollama is running Mistral; start Streamlit via streamlit run app.py.
+   ```bash
+   python src/chunk_document.py
+   python src/embed_and_index.py
+   ```
 
-🧑‍💻 Sample Queries & Screenshots
-Example Queries
-Query	AI Response (Excerpt)
+   *Or run:*
 
-How are legal disputes resolved between eBay and users?	
+   ```bash
+   jupyter notebook notebooks/01_preprocessing_and_embedding.ipynb
+   ```
 
+6. **Start Ollama for LLM serving:**
 
+   ```bash
+   ollama run mistral
+   ```
 
-What are sellers responsible for when listing items?	
+7. **Start the Streamlit Chatbot:**
 
+   ```bash
+   streamlit run app.py
+   ```
 
+   Visit [http://localhost:8501](http://localhost:8501) in your browser.
 
-Who is eBay’s CEO? (failure)	
+---
 
+## 🤖 Model & Embedding Choices
 
-Screenshots
-data/Screenshot 2025-06-24 at 17.58.47.png
-Chatbot Demo Screenshot
-Chatbot showing real-time streaming answer and cited chunks.
-Link to demo video (replace with actual URL if submitting)
+- **Embedding Model:** `all-MiniLM-L6-v2` (Sentence Transformers)
+- **Vector Database:** FAISS (IndexFlatIP; cosine similarity)
+- **LLM:** Mistral-7B-Instruct (via Ollama)
+- **Prompt Design:** Constrains answers to only use retrieved chunks to minimize hallucination.
 
+---
 
-🚦 Notes: Hallucination, Limitations, Performance
-Control:
-Strong prompt instructions + chunk-based retrieval keep answers accurate and grounded.
-Limitations:
-Info must be present in document; ambiguous queries may retrieve wrong passages if chunking misses key context.
-Reproducibility:
-Full pipeline in scripts and Jupyter notebook; step-by-step documentation for review.
+## 🗂️ Project Structure
 
-📖 Further Details
-The notebook in /notebooks presents preprocessing, chunking, and embedding steps in detail.
-All source code is documented and modular for easy extension.
+```
+├── app.py               # Streamlit Chatbot Interface
+├── data/                # Folder for input documents
+├── notebooks/           # Jupyter notebooks for EDA and preprocessing
+├── src/
+│   ├── chunk_document.py
+│   ├── embed_and_index.py
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 🧑‍💻 Sample Queries & Screenshots
+
+| Query                                   | AI Response (Excerpt)                    |
+| --------------------------------------- | ---------------------------------------- |
+| How are legal disputes resolved?        | "Legal disputes are resolved through..." |
+| What are sellers responsible for?       | "Sellers must ensure listed items..."    |
+| Who is eBay's CEO? *(Known Limitation)* | May fail if outside document scope       |
+
+**Example Screenshot:** `data/Screenshot_Chatbot_Demo.png`
+
+---
+
+## 🚦 Notes: Hallucination, Limitations, Performance
+
+- **Control:** Prompt forces answers grounded only in retrieved chunks.
+- **Limitations:** Answers only based on uploaded document; incomplete context may affect accuracy.
+- **Performance:** Efficient with local inference, fast vector retrieval; scalable with FAISS tuning.
+
+---
+
+## 📖 Further Details
+
+- Step-by-step Jupyter notebook for preprocessing and embeddings.
+- Modular, documented source code for easy extension.
+
+---
+
+**Replace demo image/links as applicable for final submission.**
+
