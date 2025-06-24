@@ -127,14 +127,5 @@ graph TD
 - **Limitations:** Answers only based on uploaded document; incomplete context may affect accuracy.
 - **Performance:** Efficient with local inference, fast vector retrieval; scalable with FAISS tuning.
 
----
 
-## 📖 Further Details
-
-- Step-by-step Jupyter notebook for preprocessing and embeddings.
-- Modular, documented source code for easy extension.
-
----
-
-**Replace demo image/links as applicable for final submission.**
 
