@@ -118,8 +118,7 @@ graph TD
 | What are sellers responsible for?       | "Sellers must ensure listed items..."    |
 | Who is eBay's CEO? *(Known Limitation)* | May fail if outside document scope       |
 
-**Example Screenshot:** 
-data/Screenshot_Chatbot_Demo.png
+**Example Screenshot:** `data/Screenshot 2025-06-24 at 17.58.47.png`
 
 ---
 
