@@ -1,0 +1,11 @@
+streamlit
+sentence-transformers
+faiss-cpu
+transformers
+torch
+nltk
+tqdm
+numpy
+accelerate
+watchdog
+matplotlib
