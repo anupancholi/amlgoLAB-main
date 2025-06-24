@@ -3,7 +3,7 @@ from src.retriever import ChunkRetriever
 from src.generator import format_prompt, ollama_generate_stream
 import numpy as np
 
-# Load retriever at app start
+# We firstly load retriever at app start
 
 
 @st.cache_resource

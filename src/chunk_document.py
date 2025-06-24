@@ -32,7 +32,6 @@ def chunk_text(text, chunk_size=250, overlap=50):
         sentence_length = len(sentence.split())
         if current_length + sentence_length > chunk_size:
             chunks.append(' '.join(current_chunk))
-            # Start new chunk with overlap
             overlap_words = ' '.join(current_chunk).split()[-overlap:]
             current_chunk = [' '.join(overlap_words), sentence]
             current_length = len(' '.join(current_chunk).split())
