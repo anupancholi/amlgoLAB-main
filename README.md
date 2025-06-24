@@ -10,7 +10,7 @@ The pipeline leverages semantic chunking, fast vector search (FAISS), and a loca
 
 ## 📐 Project Architecture & Flow
 
-```mermaid
+
 graph TD
     A[Document Upload] --> B[Preprocessing and Cleaning]
     B --> C[Sentence-aware Chunking]
@@ -21,7 +21,6 @@ graph TD
     G --> H[Prompt LLM (Mistral via Ollama)]
     H --> I[Streamed, Grounded Answer]
 
-```
 
 **Pipeline Steps:**
 
