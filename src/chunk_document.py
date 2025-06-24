@@ -2,11 +2,9 @@ import os
 import nltk
 import re
 from tqdm import tqdm
-nltk.data.path.append('/Users/GLOBAL/nltk_data')
+nltk.data.path.append('/Users/anniii/nltk_data')
 
-nltk.download('punkt', download_dir='/Users/GLOBAL/nltk_data')
-
-nltk.download('punkt_tab', download_dir='/Users/GLOBAL/nltk_data')
+nltk.download('punkt', download_dir='/Users/anniii/nltk_data')
 
 
 def clean_text(text):
