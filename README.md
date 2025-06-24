@@ -119,7 +119,7 @@ graph TD
 | Who is eBay's CEO? *(Known Limitation)* | May fail if outside document scope       |
 
 **Example Screenshot:** `data/Screenshot 2025-06-24 at 17.58.47.png`
-
+data/Screenshot 2025-06-24 at 17.58.47.png
 ---
 
 ## 🚦 Notes: Hallucination, Limitations, Performance
